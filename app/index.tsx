@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   image: {
     width: 250, // Set the width of the image
     height: 250, // Set the height of the image
-    marginBottom: 20, // Space between image and text
+    marginBottom: 10, // Space between image and text
   },
   text: {
     fontSize: 20,
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   link: {
     fontSize: 16,
-    color: "#007BFF", // Link color
-    textDecorationLine: "underline", // Underline the link
+    color: "#007BFF", 
+    textDecorationLine: "none", 
   },
 });

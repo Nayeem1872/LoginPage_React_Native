@@ -1,5 +1,6 @@
+import { Link } from 'expo-router';
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 
 export default function LoginScreen() {
   const [username, setUsername] = useState('');
@@ -16,41 +17,50 @@ export default function LoginScreen() {
   return (
     <KeyboardAvoidingView 
       style={styles.container} 
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Adjust based on the platform
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : 0} // Offset for iOS if needed
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'} 
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : 20} 
     >
-      <View style={styles.topImageContainer}>
-        <Image
-          source={require("./assets/topVector.png")}
-          style={styles.topImage}
-        />
-      </View>
-      <View style={styles.helloContainer}>
-        <Text style={styles.helloText}>Hello</Text>
-      </View>
-      <View>
-        <Text style={styles.signInText}>Sign in to your account</Text>
-      </View>
-      <View style={styles.formContainer}>
-        <TextInput 
-          style={styles.input} 
-          placeholder="Username" 
-          value={username} 
-          onChangeText={setUsername} 
-        />
-        <TextInput 
-          style={styles.input} 
-          placeholder="Password" 
-          value={password} 
-          onChangeText={setPassword} 
-          secureTextEntry 
-        />
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-      </View>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }} bounces={false}>
+        <View >
+          <Image
+            source={require("./assets/topVector.png")}
+            style={styles.topImage}
+          />
+        </View>
+        <View >
+          <Text style={styles.helloText}>Hello</Text>
+        </View>
+        <View>
+          <Text style={styles.signInText}>Sign in to your account</Text>
+        </View>
+        <View style={styles.formContainer}>
+          <TextInput 
+            style={styles.input} 
+            placeholder="Username" 
+            value={username} 
+            onChangeText={setUsername} 
+          />
+          <TextInput 
+            style={styles.input} 
+            placeholder="Password" 
+            value={password} 
+            onChangeText={setPassword} 
+            secureTextEntry 
+          />
+          <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+        </View>
+        <Link
+        href={{ pathname: "/signup", params: { name: "Bacon" } }}
+        style={styles.link}
+      >
+        Don't have an account? Sign up
+      </Link>
+      </ScrollView>
+  
       <Image
-        source={require('./assets/Vector 2.png')} // Update with your actual image path
+        source={require('./assets/Vector 2.png')}
         style={styles.bottomImage}
       />
     </KeyboardAvoidingView>
@@ -62,17 +72,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f5f5f5',
     justifyContent: 'space-between',
-    paddingBottom: 90, // Add padding at the bottom for the image
+    paddingBottom: 90,
   },
-  topImageContainer: {},
+ 
   topImage: {
     width: "100%",
     height: 130,
   },
-  helloContainer: {},
+  link: {
+    fontSize: 16,
+    color: "#007BFF",
+    marginTop: 15,
+    textAlign: 'center',
+  },
   helloText: {
     textAlign: "center",
-    fontSize: 70,
+    fontSize: 30,
     fontWeight: "500",
     color: "#262626",
   },
@@ -82,8 +97,6 @@ const styles = StyleSheet.create({
     color: "#262626",
   },
   formContainer: {
-    flex: 1,
-    justifyContent: 'center',
     padding: 20,
   },
   input: {
@@ -91,32 +104,32 @@ const styles = StyleSheet.create({
     padding: 15,
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 25, // Rounded corners
+    borderRadius: 25,
     marginBottom: 15,
     backgroundColor: '#fff',
-    shadowColor: '#000', // Shadow properties
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.5,
-    elevation: 5, // For Android shadow
+    elevation: 5,
   },
   button: {
     width: '100%',
     padding: 15,
     backgroundColor: '#007bff',
-    borderRadius: 25, // Rounded corners
+    borderRadius: 25,
     alignItems: 'center',
-    shadowColor: '#000', // Shadow properties
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.5,
-    elevation: 5, // For Android shadow
+    elevation: 5,
   },
   buttonText: {
     color: '#fff',
@@ -124,9 +137,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   bottomImage: {
-    width: 100, // Adjust width according to your image
-    height: 160, // Adjust height according to your image
-    position: 'absolute', // Positioning at bottom left
+    width: 100,
+    height: 160,
+    position: 'absolute',
     bottom: 10,
     left: 10,
   },
